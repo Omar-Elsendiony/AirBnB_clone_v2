@@ -10,7 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
+import re
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
@@ -121,7 +121,24 @@ class HBNBCommand(cmd.Cmd):
         elif args not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
+        dictParam = dict()
+        arg_list = args.split(" ")
+        for arg in args:
+            key, val = arg.split("=")
+            if val.startswith("\"") and val.endswith("\""):
+                val = re.sub(r"\"", "\\\"", val)
+                val = re.sub(r"_", " ", val)
+            elif val.isdigit():
+                val = int(val)
+            elif "." in val:
+                units, decimal = val.strip(".")
+                if not (units.isdigit() and decimal.isdigit()):
+                    return
+                val = float(val)
+            else:
+                return
+            dictParam[key] = val
+        new_instance = HBNBCommand.classes[arg_list[0]](**dictParam)
         storage.save()
         print(new_instance.id)
         storage.save()
