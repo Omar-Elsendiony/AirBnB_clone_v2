@@ -134,7 +134,9 @@ class HBNBCommand(cmd.Cmd):
                 val = int(val)
             elif "." in val:
                 units, decimal = val.split(".")
-                if not (units.isdigit() and decimal.isdigit()):
+                if not (units.lstrip("-").isdigit() and decimal.isdigit()):
+                    print(units)
+                    print(decimal)
                     return
                 val = float(val)
             else:
