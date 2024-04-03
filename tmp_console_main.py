@@ -127,12 +127,10 @@ class HBNBCommand(cmd.Cmd):
         arg_list_mod = arg_list[1:]
         for arg in arg_list_mod:
             key, val = arg.split("=")
-            # if val[0] == "'" and val[-1] == "'":
-            #     val = eval(val)
             if val.startswith("\"") and val.endswith("\""):
                 val = re.sub(r"\"", "\\\"", val)
                 val = re.sub(r"_", " ", val)
-            elif val.lstrip("-").isdigit():
+            elif val.isdigit():
                 val = int(val)
             elif "." in val:
                 units, decimal = val.split(".")
@@ -142,6 +140,7 @@ class HBNBCommand(cmd.Cmd):
                     return
                 val = float(val)
             else:
+                print("Invalid value")
                 return
             dictParam[key] = val
         # print(dictParam)
