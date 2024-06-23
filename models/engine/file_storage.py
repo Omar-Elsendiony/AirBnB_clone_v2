@@ -19,7 +19,10 @@ class FileStorage:
                     objectsToReturn.update({obj_key:obj_val})
             return objectsToReturn
 
+    
+
     def delete(self, obj=None):
+        """Method to delete a specified object from storage"""
         if (obj is not None):
             key = obj.__class__.__name__ + '.' + obj.id
             if key in FileStorage.__objects:
