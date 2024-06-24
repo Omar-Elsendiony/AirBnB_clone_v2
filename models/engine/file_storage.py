@@ -41,7 +41,11 @@ class FileStorage:
             temp.update(FileStorage.__objects)
             for key, val in temp.items():
                 temp[key] = val.to_dict()
-            json.dump(temp, f)
+            try:
+                del temp['_sa_instance_state']
+                json.dump(temp, f)
+            except:
+                pass
 
     def reload(self):
         """Loads storage dictionary from file"""
