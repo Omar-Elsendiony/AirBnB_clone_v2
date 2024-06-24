@@ -247,9 +247,13 @@ class HBNBCommand(cmd.Cmd):
         else:
             for k, v in storage.all().items():
                 print_list.append(str(v))
-
         print(print_list)
+        
 
+    def delete(self, obj=None):
+        pass
+        
+        
     def help_all(self):
         """ Help information for the all command """
         print("Shows all objects, or all of a class")
