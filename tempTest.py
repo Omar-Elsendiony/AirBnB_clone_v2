@@ -61,17 +61,16 @@ def exec_command(my_console, the_command, last_lines = 1):
 """
  Tests
 """
-result = exec_command(my_console, "all State", 4)
-if result is None or result == "":
-    print("FAIL: No states retrieved")
-if "my_id_c" not in result or "California" not in result :
-    print("FAIL: Missing information California")
-if "my_id_a" not in result or "Arizona" not in result :
-    print("FAIL: Missing information Arizona")
-if "my_id_n" not in result or "New York" not in result :
-    print("FAIL: Missing information New York")
-if "my_id_i" not in result or "Illinois" not in result :
-    print("FAIL: Missing information Illinois")
+state_id = exec_command(my_console, "create State name=\"California\"")
+print('------------------------------------')
+print(state_id)
+print('------------------------------------')
+if state_id is None or state_id == "":
+    print("FAIL: Can't create State")
+
+city_id = exec_command(my_console, "create City state_id=\"{}\" name=\"Fremont\"".format(state_id))
+if city_id is None or city_id == "":
+    print("FAIL: Can't create City")
     
 print("OK", end="")
 

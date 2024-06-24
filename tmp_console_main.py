@@ -12,7 +12,9 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+import models
 import re
+
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
@@ -132,8 +134,11 @@ class HBNBCommand(cmd.Cmd):
             # if val[0] == "'" and val[-1] == "'":
             #     val = eval(val)
             if val.startswith("\"") and val.endswith("\""):
-                val = re.sub(r"\"", "\\\"", val)
-                val = re.sub(r"_", " ", val)
+                if  models.storage_t != "db":
+                    val = re.sub(r"\"", "\\\"", val)
+                    val = re.sub(r"_", " ", val)
+                else:
+                    val = re.sub(r"\"", "", val)
             elif val.lstrip("-").isdigit():
                 val = int(val)
             elif "." in val:
@@ -350,5 +355,3 @@ class HBNBCommand(cmd.Cmd):
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
 
-if __name__ == "__main__":
-    HBNBCommand().cmdloop()
