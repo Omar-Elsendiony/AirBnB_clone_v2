@@ -42,7 +42,7 @@ class DBStorage:
         objectsToReturn = {}
         classNames = ['User', 'Place', 'State', 'City', 'Amenity', 'Review']
         if (cls is not None):
-            allObjectsSingleClass = self.__session.query(cls).all() # returns all objects of one class
+            allObjectsSingleClass = self.__session.query(self.classes[cls]).all() # returns all objects of one class
             for object in allObjectsSingleClass:
                 key = object.__class__.__name__ + '.' + object.id
                 objectsToReturn.update({key: object})

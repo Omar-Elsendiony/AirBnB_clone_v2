@@ -1,7 +1,0 @@
-create State name="California"
-create State name="Arizona"
-all State
-
-create Place city_id="1" user_id="1" name="My_house" description="no_description_yet" number_rooms=4 number_bathrooms=0 max_guest=-3 price_by_night=100 latitude=-120.12 longitude=0.41921928
-all Place
-
