@@ -137,8 +137,8 @@ class HBNBCommand(cmd.Cmd):
                 if  models.storage_t != "db":
                     val = re.sub(r"\"", "\\\"", val)
                     val = re.sub(r"_", " ", val)
-                # else:
-                #     val = re.sub(r"\"", "", val)
+                else:
+                    val = re.sub(r"\"", "", val)
             elif val.lstrip("-").isdigit():
                 val = int(val)
             elif "." in val:
